@@ -28,16 +28,17 @@ for _ in range(N):
     point_list.append([sd.random_number(100, width), sd.random_number(300, hight), sd.random_number(10, 100)])
 
 while True:
-    sd.clear_screen()
+    sd.start_drawing()
     for i, (x, y, length) in enumerate(point_list):
         point = sd.get_point(x, y)
-        sd.snowflake(center=point, length=length)
+        sd.snowflake(center=point, length=length, color=sd.background_color)
         point_list[i][0] += sd.random_number(-20, 20)
         point_list[i][1] -= sd.random_number(2, 10)
-        if point_list[i][1] <= 0:
+        point = sd.get_point(point_list[i][0], point_list[i][1])
+        sd.snowflake(center=point, length=length, color=sd.COLOR_WHITE)
+        if point_list[i][1] <= 25:
             point_list[i][1] = sd.random_number(hight, hight)
-
-
+    sd.finish_drawing()
     sd.sleep(0.1)
     if sd.user_want_exit():
         break
