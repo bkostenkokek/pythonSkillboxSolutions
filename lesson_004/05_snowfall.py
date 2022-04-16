@@ -1,5 +1,3 @@
- -*- coding: utf-8 -*-
-
 # На основе кода из практической части реализовать снегопад:
 # - создать списки данных для отрисовки N снежинок
 # - нарисовать падение этих N снежинок
@@ -25,7 +23,7 @@ class Snowlake:
         self.y = y
         self.size = size
 
-    def move(self)
+    def move(self):
         self.x += sd.random_number(-20, 20)
         self.y -= sd.random_number(2, 10)
 
@@ -37,20 +35,17 @@ sd.resolution = (width, height)
 snowflakes = []
 snowflakeAmount = 25
 for _ in range(snowflakeAmount):
-    snowflakes.append(Snowflake(
-                        sd.random_number(100, width),
-                        sd.random_number(300, height),
-                        sd.random_number(10, 100))
+    snowflakes.append(Snowlake(sd.random_number(100, width), sd.random_number(300, height), sd.random_number(10, 100)))
 
 while True:
     sd.start_drawing()
 
     for sf in snowflakes:
         point = sd.get_point(sf.x, sf.y)
-        sd.snowflake(center=point, length=size, color=sd.background_color)
+        sd.snowflake(center=point, length=sf.size, color=sd.background_color)
         sf.move()
         point = sd.get_point(sf.x, sf.y)
-        sd.snowflake(center=point, length=size, color=sd.COLOR_WHITE)
+        sd.snowflake(center=point, length=sf.size, color=sd.COLOR_WHITE)
         if sf.y <= 25:
             sf.y = sd.random_number(height, height)
 
