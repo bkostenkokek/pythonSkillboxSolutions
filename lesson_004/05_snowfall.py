@@ -2,6 +2,9 @@
 
 import simple_draw as sd
 
+width = 1200
+hight = 800
+
 sd.resolution = (1200, 800)
 
 # На основе кода из практической части реализовать снегопад:
@@ -19,10 +22,10 @@ sd.resolution = (1200, 800)
 
 # TODO здесь ваш код
 
-N = 50
+N = 25
 point_list = []
 for _ in range(N):
-    point_list.append([sd.random_number(100, 1100), sd.random_number(300, 850), sd.random_number(10, 100)])
+    point_list.append([sd.random_number(100, width), sd.random_number(300, hight), sd.random_number(10, 100)])
 
 while True:
     sd.clear_screen()
@@ -31,8 +34,10 @@ while True:
         sd.snowflake(center=point, length=length)
         point_list[i][0] += sd.random_number(-20, 20)
         point_list[i][1] -= sd.random_number(2, 10)
-        if y < 10:
-            break
+        if point_list[i][1] <= 0:
+            point_list[i][1] = sd.random_number(hight, hight)
+
+
     sd.sleep(0.1)
     if sd.user_want_exit():
         break
