@@ -1,12 +1,5 @@
 # -*- coding: utf-8 -*-
 
-import simple_draw as sd
-
-width = 1200
-hight = 800
-
-sd.resolution = (1200, 800)
-
 # На основе кода из практической части реализовать снегопад:
 # - создать списки данных для отрисовки N снежинок
 # - нарисовать падение этих N снежинок
@@ -20,11 +13,18 @@ sd.resolution = (1200, 800)
 # sd.user_want_exit()
 
 
+import simple_draw as sd
+
+width = 1200
+hight = 800
+
+sd.resolution = (1200, 800)
+
 # TODO здесь ваш код
 
-N = 25
 point_list = []
-for _ in range(N):
+snowfallAmount = 25
+for _ in range(snowfallAmount):
     point_list.append([sd.random_number(100, width), sd.random_number(300, hight), sd.random_number(10, 100)])
 
 while True:
