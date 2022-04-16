@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+ -*- coding: utf-8 -*-
 
 # На основе кода из практической части реализовать снегопад:
 # - создать списки данных для отрисовки N снежинок
@@ -15,29 +15,45 @@
 
 import simple_draw as sd
 
+class Snowlake:
+    x = 0
+    y = 0
+    size = 0
+
+    def __init__(self, x, y, size):
+        self.x = x
+        self.y = y
+        self.size = size
+
+    def move(self)
+        self.x += sd.random_number(-20, 20)
+        self.y -= sd.random_number(2, 10)
+
 width = 1200
-hight = 800
+height = 800
+sd.resolution = (width, height)
 
-sd.resolution = (1200, 800)
-
-# TODO здесь ваш код
-
-point_list = []
-snowfallAmount = 25
-for _ in range(snowfallAmount):
-    point_list.append([sd.random_number(100, width), sd.random_number(300, hight), sd.random_number(10, 100)])
+#create snoflakes
+snowflakes = []
+snowflakeAmount = 25
+for _ in range(snowflakeAmount):
+    snowflakes.append(Snowflake(
+                        sd.random_number(100, width),
+                        sd.random_number(300, height),
+                        sd.random_number(10, 100))
 
 while True:
     sd.start_drawing()
-    for i, (x, y, length) in enumerate(point_list):
-        point = sd.get_point(x, y)
-        sd.snowflake(center=point, length=length, color=sd.background_color)
-        point_list[i][0] += sd.random_number(-20, 20)
-        point_list[i][1] -= sd.random_number(2, 10)
-        point = sd.get_point(point_list[i][0], point_list[i][1])
-        sd.snowflake(center=point, length=length, color=sd.COLOR_WHITE)
-        if point_list[i][1] <= 25:
-            point_list[i][1] = sd.random_number(hight, hight)
+
+    for sf in snowflakes:
+        point = sd.get_point(sf.x, sf.y)
+        sd.snowflake(center=point, length=size, color=sd.background_color)
+        sf.move()
+        point = sd.get_point(sf.x, sf.y)
+        sd.snowflake(center=point, length=size, color=sd.COLOR_WHITE)
+        if sf.y <= 25:
+            sf.y = sd.random_number(height, height)
+
     sd.finish_drawing()
     sd.sleep(0.1)
     if sd.user_want_exit():
