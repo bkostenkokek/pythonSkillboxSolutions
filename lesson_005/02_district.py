@@ -6,7 +6,11 @@
 # https://docs.python.org/3/library/stdtypes.html#str.join
 
 # TODO здесь ваш код
+ppl = ["Alex",
+       "Bohdan",
+       "Andrew",
+       "Oleg",
+       "Ihor"]
 
-
-
+print(', '.join(ppl))
 
