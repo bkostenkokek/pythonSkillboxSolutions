@@ -20,7 +20,6 @@
 # Формат ответа компьютера
 # > быки - 1, коровы - 1
 
-
 # Составить отдельный модуль mastermind_engine, реализующий функциональность игры.
 # В этом модуле нужно реализовать функции:
 #   загадать_число()
@@ -44,3 +43,11 @@
 # Точнее, в этом случае важен принцип единственной ответственности - https://goo.gl/rYb3hT
 
 # TODO здесь ваш код...
+from mastermind_engine import given_number, read_number, check_number, game_over
+
+print(check_number(given_number(), read_number()))
+
+
+
+
+
