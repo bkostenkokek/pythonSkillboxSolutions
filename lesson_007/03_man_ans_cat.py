@@ -26,6 +26,7 @@ from random import randint
 # Человеку и коту надо вместе прожить 365 дней.
 
 # TODO здесь ваш код
+from termcolor import cprint
 
 
 class Man:
@@ -48,7 +49,7 @@ class Man:
         self.satiety -= 20
 
     def shopping(self):
-        print("{}, покупал еду".format(self.name))
+        print("{}, купил еду".format(self.name))
         self.food += 50
         self.money -= 50
         self.satiety -= 10
@@ -56,72 +57,94 @@ class Man:
     def eat(self):
         print("{}, покушал".format(self.name))
         self.satiety += 50
+        self.food -= 50
+
+    def food_cat(self):
+        print("{}, сходил за кормом для кота".format(self.name))
+        self.satiety -= 10
+        self.money -= 50
+        cat.food_cat += 50
+
+
+    def cleaning_cat(self):
+        print("{}, убрал за котом".format(self.name))
+        self.satiety -= 50
+        cat.dirt -= 50
 
     def bogdan_act(self):
         if self.satiety <= 0:
-            print("{}, RIP".format(self.name))
-        elif self.satiety <= 20:
+            cprint("{}, RIP".format(self.name), color='red')
+        elif self.satiety <= 50:
             self.eat()
         elif self.food <= 50:
             self.shopping()
         elif self.money <= 50:
             self.work()
+        elif cat.food_cat <= 50:
+            self.food_cat()
         else:
             self.play_DOTA_2()
 
 
-
 class Cat:
+
     def __init__(self, name):
-        self.food = 0
-        self.dirt = 0
-        self.home = None
         self.name = name
+        self.satiety = 30
+        self.food_cat = 0
+        self.dirt = 0
+
+    def __str__(self):
+        return "Кот - {}, сытность - {}, корма - {}".format(self.name, self.satiety, self.food_cat)
+
 
     def sleep(self):
         print("{}, спит".format(self.name))
-        self.food -= 10
+        self.satiety -= 10
 
     def eat(self):
         print("{}, кушает".format(self.name))
-
-
+        self.food_cat -= 10
+        self.satiety += 20
 
     def drat_oboi(self):
         print("{}, подрал обои".format(self.name))
-        self.food -= 10
+        self.satiety -= 10
         self.dirt += 5
 
+    def speed_run_cat(self):
+        print("Пушистый {} целый день носился по квартире".format(self.name))
+        self.satiety -= 20
+        self.dirt -= 5
 
+    def cat_act(self):
+        if self.satiety <= 0:
+            cprint("{}, RIP".format(self.name), color='red')
+            return
+        elif self.satiety < 30:
+            self.eat()
+        dice = randint(1, 6)
+        if dice == 1:
+            self.drat_oboi()
+        elif dice == 2:
+            self.speed_run_cat()
+        else:
+            self.sleep()
+
+
+cat = Cat(name="Барсік")
 ppl = Man(name="Богдан")
 
-
 for day in range(365):
-    print('====================== {} day ======================'.format(day))
+    cprint('=====================================================', color='cyan')
+    cprint('====================== {} day ======================'.format(day), color='cyan')
+    cprint('=====================================================', color='cyan')
     ppl.bogdan_act()
-    print('====================== в конце дня ======================')
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    cat.cat_act()
+    cprint('=====================================================', color='cyan')
+    cprint('=====================================================', color='cyan')
+    print(ppl.__str__())
+    print(cat.__str__())
 
 # Усложненное задание (делать по желанию)
 # Создать несколько (2-3) котов и подселить их в дом к человеку.
