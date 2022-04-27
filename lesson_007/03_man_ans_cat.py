@@ -27,6 +27,102 @@ from random import randint
 
 # TODO здесь ваш код
 
+
+class Man:
+    def __init__(self, name):
+        self.name = name
+        self.satiety = 50
+        self.money = 50
+        self.food = 0
+
+    def __str__(self):
+        return "Я - {}, сытность - {}, денег - {}".format(self.name, self.satiety, self.money)
+
+    def work(self):
+        print("{}, пошел на работу".format(self.name))
+        self.money += 150
+        self.satiety -= 50
+
+    def play_DOTA_2(self):
+        print("{}, играл в DOTA целый день".format(self.name))
+        self.satiety -= 20
+
+    def shopping(self):
+        print("{}, покупал еду".format(self.name))
+        self.food += 50
+        self.money -= 50
+        self.satiety -= 10
+
+    def eat(self):
+        print("{}, покушал".format(self.name))
+        self.satiety += 50
+
+    def bogdan_act(self):
+        if self.satiety <= 0:
+            print("{}, RIP".format(self.name))
+        elif self.satiety <= 20:
+            self.eat()
+        elif self.food <= 50:
+            self.shopping()
+        elif self.money <= 50:
+            self.work()
+        else:
+            self.play_DOTA_2()
+
+
+
+class Cat:
+    def __init__(self, name):
+        self.food = 0
+        self.dirt = 0
+        self.home = None
+        self.name = name
+
+    def sleep(self):
+        print("{}, спит".format(self.name))
+        self.food -= 10
+
+    def eat(self):
+        print("{}, кушает".format(self.name))
+
+
+
+    def drat_oboi(self):
+        print("{}, подрал обои".format(self.name))
+        self.food -= 10
+        self.dirt += 5
+
+
+ppl = Man(name="Богдан")
+
+
+for day in range(365):
+    print('====================== {} day ======================'.format(day))
+    ppl.bogdan_act()
+    print('====================== в конце дня ======================')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # Усложненное задание (делать по желанию)
 # Создать несколько (2-3) котов и подселить их в дом к человеку.
 # Им всем вместе так же надо прожить 365 дней.
