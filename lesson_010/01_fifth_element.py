@@ -17,4 +17,5 @@ print(f"- Leeloo Dallas! Multi-pass № {result}!")
 
 
 
+# Тест для гитхаба
 
